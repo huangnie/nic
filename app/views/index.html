@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="/assets/css/index.css">
+</head>
+<body>
+
+<button class="btn primary" id="editor-save"> 保 存 </button>
+<div id="editor">
+    <textarea v-model="input" ></textarea>
+    <div id="editor-content" v-html="input | marked"></div>
+</div>
+
+</body>
+<script src="/assets/lib/jquery-1.7.2.min.js"></script>
+<script src="/assets/lib/vue.js"></script>
+<script>
+    var editor = new Vue({
+        el: '#editor',
+        data: {
+            input: 'hello input here please'
+        },
+        filters: {
+            marked: 'marked'
+        }
+    })
+    $('#editor-save').click(function(){
+        var data = $('#editor-content').html();
+        $.post('http://127.0.0.1:9527/index/save',{data:data})
+                .success(function(resp){
+                    resp = JSON.parse(resp);
+                    alert(resp.msg);
+                })
+                .error(function(err){
+                    alert('err:');
+                    console.log(err);
+                })
+    })
+</script>
+<!--<script src="app/js/index.js"></script>-->
+
+</html>

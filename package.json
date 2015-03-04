@@ -1,0 +1,11 @@
+{
+  "name": "nic",
+  "description": "nic is mvc framework for node developer",
+  "version": "0.0.1",
+  "dependencies": {
+    "mongoose": "*",
+  },
+  "engines": {
+    "node": ">= 0.10.35"
+  }
+}
